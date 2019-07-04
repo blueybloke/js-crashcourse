@@ -168,6 +168,8 @@ if(b === 10) {
 
 // Ternary operator ? (Think if this, THEN (?) that)
 const color = b > 10 ? 'red' : 'blue';
+console.log(color);
+
 switch (color) {
     case 'red':
         console.log('color is red');
@@ -179,3 +181,64 @@ switch (color) {
         console.log('color is not red or blue');
         break;
 }
+
+// Functions
+function addNums(num1 = 1, num2 = 1) {
+    console.log(num1+num2);
+}
+
+addNums(5,4); // If bad value is passed, returns NaN (Not a Number)
+addNums(); // Parameters can be set with defaults
+
+function betterAddNums(num1 = 1, num2 = 1) {
+    return num1 + num2;
+}
+
+console.log(betterAddNums(8,8));
+
+// Arrow Functions (Lambda) : Handy feature that cleans stuff up
+const arrowAddNums = (num1 = 1, num2 = 1) => num1 + num2;
+console.log(arrowAddNums(5,5));
+
+todos.forEach((todo) => console.log(todo.text));
+
+
+
+
+// OOP
+// Creating objects
+/*
+// Created with a constructor like below
+function Person (firstName, lastName, dob) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.dob = new Date(dob);
+
+    this.getFullName = function() {
+        return `${this.firstName} ${this.lastName}`
+    }
+}
+
+Person.prototype.getBirthYear =  function () {
+    return this.dob.getFullYear();
+}
+*/
+
+// Classes (The better way)
+class Person {
+    constructor(firstName, lastName, dob) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dob = new Date(dob);
+    }
+
+    getBirthYear() {
+        return this.dob.getFullYear();
+    }
+}
+
+// Instantiate object
+const person1 = new Person('Timmy', 'Turner', '4-3-1980');
+
+console.log(person1);
+console.log(`${person1.firstName} ${person1.lastName} was born in ${person1.getBirthYear()}`);
