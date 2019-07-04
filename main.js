@@ -1,51 +1,30 @@
-// DOM manipulation exercise
 
-// The window object is the top level object that represents the browser and all possible methods.
-// console.log(window);
+const myForm = document.querySelector('#my-form');
+const nameInput = document.querySelector('#name');
+const emailInput = document.querySelector('#email');
+const msg = document.querySelector('.msg');
+const userList = document.querySelector('#users');
 
+myForm.addEventListener('submit', onSubmit); //Adding a listener and naming a function for it to call
 
-// Single element selectors:
-//const form = document.getElementById('my-form');
+function onSubmit(e) {
+    e.preventDefault();
+    if (nameInput.value === '' || emailInput.value === '') {
+        msg.classList.add('error');
+        msg.innerHTML = 'Please fill out all fields'
 
-//Query select can be used for many things, like ids, tags, classes etc.
-//console.log(document.querySelector('.container'));
+        //Make it disappear after 3 seconds
+        setTimeout(() => msg.remove(), 3000);
+    } else {
+        const li = document.createElement('li');
+        li.appendChild(document.createTextNode(
+        `${nameInput.value} : ${emailInput.value}`));
 
+        userList.appendChild(li);
 
-// Mulitple element
-//console.log(document.querySelectorAll('.item')); // Creates a 'node list' which is basically just an array
-
-// Iterating over dom elements
-const items = document.querySelectorAll('.item');
-items.forEach((item) => console.log(item));
-
-const ul = document.querySelector('.items');
-
-//Removing elements
-//ul.remove();
-//ul.lastElementChild.remove();
-
-//Editing textContent property
-ul.firstElementChild.textContent = 'Hello';
-ul.children[1].innerText = 'Brad';
-ul.lastElementChild.innerHTML = '<h1>Hello!</h1>';
-
-// Events
-
-const bnt = document.querySelector('.btn');
-
-//Changing CSS
-bnt.style.background = 'red';
-
-// Adding event listeners
-bnt.addEventListener('click', (e) => {
-    e.preventDefault(); //Default behaviour of click event on buttons submits the form (refresh)
-    console.log('click');
-    
-    //console.log(e.target.className); //Target refers to object/dom element that invoked the event
-
-    document.querySelector('#my-form').style.background = '#ccc';
-    document.querySelector('body').classList.add('bg-dark');
-
-    ul.lastElementChild.innerHTML = '<h1>Goodbye!</h1>';
-
-});
+        // Clear fields
+        nameInput.value = '';
+        emailInput.value = '';
+        console.log('success');
+    }
+}
